@@ -1,0 +1,41 @@
+.container{
+    margin: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 12.9%;
+    left: 0;
+    bottom: 0;
+}
+
+.task-container{
+    -webkit-border-radius: 10px 10px 10px 10px;
+    border-radius: 10px 10px 10px 10px;
+    padding-top: 3%;
+    margin-left: 3%;
+    background: #f9fbfd;
+    width: 100%;
+    max-width: 450px;
+    position: relative;
+
+    -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+    box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+    justify-content: center;
+    
+}
+ul{
+    list-style-position: inside;
+    padding: 1%;
+}
+li {
+    padding: 3%;
+}
+
+hr {
+    margin-left: 8%;
+    margin-right: 8%;
+    color: lightslategray;
+}
+span{
+    cursor: pointer;
+}

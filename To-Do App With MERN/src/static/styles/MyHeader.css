@@ -1,0 +1,8 @@
+.navbar {
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    position: relative;
+    height: 15vh;
+    background-color: darkslategrey;
+    color: whitesmoke;
+    justify-content: center;
+  }
