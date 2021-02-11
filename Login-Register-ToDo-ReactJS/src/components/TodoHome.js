@@ -66,23 +66,12 @@ function TodoHome({tasks, setTask}){
     //     }, 1500);
     // }
 
-    
-    let date = new Date()
-    let inline_style
-    if ((date.getMinutes() % 2) === 0){
-        inline_style = { color: "aqua"}
-    }
-    else{
-        inline_style = {color: "black"}
-    }
-
 
     let inline_style_container = { textAlign: "center" }
     
      
     return (
         <div style={inline_style_container}>
-            <h2 style={inline_style}>Aqua if it's an odd minute, black if it's an even minute.</h2>
             <div className="container">  
                 <TaskContainer tasks={tasks} setTask={setTask} handleChange={handleChange} deleteTask={deleteTask} updateTask={updateTask}/> 
             </div>
