@@ -1,0 +1,8 @@
+#AwesomeFooter { 
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    height: 50px;
+    flex-shrink: 0;
+    background-color:darkslategrey;
+    text-align: center;
+    color:whitesmoke;
+}
