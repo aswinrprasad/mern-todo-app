@@ -5,16 +5,15 @@ import './../static/styles/Content.css'
 //import taskData from './TaskData'
 import TaskContainer from './TaskConatiner'
 import axios from 'axios'
+//import axiosErrorHandler from '../hoc/axiosErrorHandler'
 
 function Content(){
     
     const [tasks, setTask] = useState([])
 
     useEffect(() => {
-        let initTask = []
         axios.get("http://192.168.18.127:5000/tasks").then(res =>{
-            initTask = res.data.map( task => task)
-            setTask(initTask)
+            setTask([...res.data])
         })
         .catch(err => console.log(err))
     }, [])

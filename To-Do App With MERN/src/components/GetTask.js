@@ -1,7 +1,7 @@
 
 import axios from 'axios'
 import React, { useState } from 'react'
-//import taskData from './TaskData'
+import Aux from '../hoc/Aux'
 
 function GetTask(props){    
 
@@ -62,7 +62,7 @@ function GetTask(props){
 
     
     return(
-        <div>
+        <Aux>
             <form onSubmit={handleSubmit}>
                 <input id="task" type="text" placeholder="Enter a to-do task" value={fieldVal} onChange={handleChange}/><br/><br/>
                 <input className="btn btn-info" type="submit" value="Submit"/>
@@ -70,7 +70,7 @@ function GetTask(props){
             </form>
             <br/>
 
-        </div>
+        </Aux>
     )
     
 }

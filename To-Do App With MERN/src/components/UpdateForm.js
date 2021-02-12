@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import Aux from '../hoc/Aux'
 
 function UpdateForm(props){
 
@@ -15,14 +16,14 @@ function UpdateForm(props){
     }
     if(props.uClicked === 1){
         return(
-            <div>
+            <Aux>
                 <input placeholder="Enter to-do task to update" type="text" value={fieldVal} onChange={handleChange}/> <br/>
                 <input style={{marginTop:"4px"}} className="btn btn-sm btn-info" type="submit" value="Update" onClick={handleSubmit}/>
-            </div>
+            </Aux>
         )
     }
 
-    return <div></div>
+    return <Aux></Aux>
 }
 
 export default UpdateForm
