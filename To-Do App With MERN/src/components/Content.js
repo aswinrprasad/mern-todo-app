@@ -4,10 +4,10 @@ import './../static/styles/Content.css'
 
 //import taskData from './TaskData'
 import TaskContainer from './TaskConatiner'
-import axios from 'axios'
-//import axiosErrorHandler from '../hoc/axiosErrorHandler'
+import axios from '../hoc/axios'
+import axiosErrorHandler from '../hoc/axiosErrorHandler'
 
-function Content(){
+function Content(props){
     
     const [tasks, setTask] = useState([])
 
@@ -16,6 +16,7 @@ function Content(){
             setTask([...res.data])
         })
         .catch(err => console.log(err))
+        console.log("Content")
     }, [])
     
     //console.log(tasks)
@@ -91,12 +92,16 @@ function Content(){
 
     let inline_style_container = { textAlign: "center" }
 
+    let cont = <TaskContainer tasks={tasks} setTask={setTask} handleChange={handleChange} deleteTask={deleteTask} updateTask={updateTask}/>
+    if(props.err){
+        cont = props.err
+    }
     
     return (
         <div style={inline_style_container}>
             <h2 style={inline_style}>Aqua if it's an odd minute, black if it's an even minute.</h2>
             <div className="container">  
-                <TaskContainer tasks={tasks} setTask={setTask} handleChange={handleChange} deleteTask={deleteTask} updateTask={updateTask}/> 
+                 {cont}
             </div>
         </div>
     )
@@ -104,4 +109,4 @@ function Content(){
     
 }
 
-export default Content
+export default axiosErrorHandler(Content, axios)
