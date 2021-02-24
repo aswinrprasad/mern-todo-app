@@ -1,17 +1,21 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const cors = require('cors')
+
+
 require('dotenv').config()
 
 const app = express()
 const port = process.env.PORT || 5000
 
+const url = process.env.mongodb_url || 'mongodb://0.0.0.0:27017/todoapp'
 app.use(cors())
 app.use(express.json())
 
 
 // setting up mongodb connection using mongoose
-mongoose.connect('mongodb://0.0.0.0:27017/todoapp', {useUnifiedTopology: true,useNewUrlParser: true, useCreateIndex:true})
+mongoose.connect(url, {useUnifiedTopology: true,useNewUrlParser: true, useCreateIndex:true})
+    
 //mongoose.connection.dropDatabase()
 const connection = mongoose.connection
 

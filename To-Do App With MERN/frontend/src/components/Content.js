@@ -10,7 +10,7 @@ import axiosErrorHandler from '../hoc/axiosErrorHandler'
 function Content(props){
     
     const [tasks, setTask] = useState([])
-
+    
     useEffect(() => {
         axios.get("http://192.168.18.127:5000/tasks").then(res =>{
             setTask([...res.data])
