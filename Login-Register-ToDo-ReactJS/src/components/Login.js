@@ -3,96 +3,129 @@ import '../static/styles/Login.css'
 import todoBG from '../static/images/todo-bg.jpg'
 import { useHistory } from 'react-router-dom'
 
-function Login({userList, addUser, userPos, setUserPos}){
+// Login Component which is displayed in the home page
+function Login({ userList, addUser, userPos, setUserPos }) {
+
+    /* emailField and passwordField to be used to dynamically show in the input 
+       fields respectively using value property in HTML */
     const [emailField, setEmailField] = useState("")
     const [passwordField, setPasswordField] = useState("")
 
-    const [emailBoxSyle, setEmailBoxStyle] = useState({borderColor: "",
+    // A state variable used for styling on email validations
+    const [emailBoxSyle, setEmailBoxStyle] = useState({
+        borderColor: "",
         ':focus': {
             color: "red"
         }
     })
 
-    const [passwordBoxSyle, setPasswordBoxStyle] = useState({borderColor: "",
+    // A state variable used for styling on password validations
+    const [passwordBoxSyle, setPasswordBoxStyle] = useState({
+        borderColor: "",
         ':focus': {
             color: "red"
         }
     })
 
+    // Check if email is in the format of abc@mail.com and style the field accordingly
     const emailChange = (event) => {
         setEmailField(event.target.value)
-        if(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(event.target.value)){
-            setEmailBoxStyle({borderColor: "cadetblue"})
+        if (/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(event.target.value)) {
+            setEmailBoxStyle({ borderColor: "cadetblue" })
         }
-        else{
-            setEmailBoxStyle({borderColor: "red"})
+        else {
+            setEmailBoxStyle({ borderColor: "red" })
         }
     }
 
-
+    // Check if password is of length 8 or above and style the field accordingly
     const passwordChange = (event) => {
         setPasswordField(event.target.value)
 
-        if(event.target.value.length >= 8){
-            setPasswordBoxStyle({borderColor: "cadetblue"})
+        if (event.target.value.length >= 8) {
+            setPasswordBoxStyle({ borderColor: "cadetblue" })
         }
-        else{
-            setPasswordBoxStyle({borderColor: "red"})
+        else {
+            setPasswordBoxStyle({ borderColor: "red" })
         }
     }
 
+    /* useHistory() is used here to redidirect to /todohome which uses Routes once the login 
+       credentials are validated */
     const history = useHistory()
+
+    // handleSubmit() handles the input and logs the user in to the todo home page
     const handleSubmit = (event) => {
         event.preventDefault()
-        let f_email = 0, f_pass = 0, pos = 0 
-        addUser( () => 
-            {
-                const u_l = userList.map((user) => {
+        const crypto = require('crypto');
+        let f_email = 0, f_pass = 0, pos = 0
+        addUser(() => {
+            const u_l = userList.map((user) => {
                 console.log(user)
-                
-                if(user.email === emailField){
+
+                // If both email and password are correct => f_email = 1, f_pass = 1
+                if (user.email === emailField) {
                     console.log(user.email)
                     f_email = 1
-                    if(user.password === passwordField){
+
+                    // The user password are stored as sha1 hashed formats
+                    if (user.password === crypto.createHash('sha1').update(passwordField).digest('hex')) {
                         console.log(user.password)
                         f_pass = 1
                         user.isLogged = true
                         setUserPos(pos)
                     }
                 }
-                pos+=1
+                pos += 1
                 return user
             })
             return u_l
         })
-        
 
-        if(f_email === 1 && f_pass === 1){
+        // Checking the flags and displaying proper output
+        if (f_email === 1 && f_pass === 1) {
             alert('User Logged In')
             history.push("/todohome")
         }
-        else{
-            alert('Password or email incorrect')
+        else if (f_email === 1 && f_pass === 0) {
+            alert('Password incorrect')
+            setPasswordField("")
         }
-    } 
-    
-    return(
-        <div className="row">
+        else {
+            alert('Password or Email are incorrect')
+            setEmailField("")
+            setPasswordField("")
+        }
+    }
+
+    return (
+        <div id="logrow" className="row">
             <div className="col-sm-9">
-                <img className="image" src={todoBG} alt="#"/>
+                <img className="image" src={todoBG} alt="#" />
             </div>
             <div className="col-sm-3 login">
                 <form onSubmit={handleSubmit} className="login-container">
                     <section>
-                        <i>Email</i> <br/>
-                        <input name="email" style={emailBoxSyle} value={emailField} onChange={emailChange} type="text" placeholder="Enter your email id"/>
+                        <i>Email</i> <br />
+                        <input name="email"
+                            style={emailBoxSyle}
+                            value={emailField}
+                            onChange={emailChange}
+                            type="text"
+                            placeholder="Enter your email id"
+                            required />
                     </section>
                     <section>
-                        <i>Password</i> <br/>
-                        <input name="password" style={passwordBoxSyle} value={passwordField} onChange={passwordChange} type="password" placeholder="Enter your password"/>
+                        <i>Password</i> <br />
+                        <input name="password"
+                            style={passwordBoxSyle}
+                            value={passwordField}
+                            onChange={passwordChange} type="password"
+                            placeholder="Enter your password"
+                            required />
                     </section>
                     <section id="login-btn-container">
-                        <input className="login-btn" type="submit" value="Login"/>
+                        <input className="login-btn" type="submit" value="Login" />
                     </section>
                 </form>
             </div>

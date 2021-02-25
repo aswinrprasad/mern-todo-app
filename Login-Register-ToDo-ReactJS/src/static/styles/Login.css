@@ -1,7 +1,7 @@
 
 .login {
-    margin: 0px 0px 0px 0px;
-    padding: 0px 0px 0px 0px;
+    margin: 0;
+    padding: 0;
     background-color: rgb(230, 237, 247);
 }
 
@@ -13,10 +13,11 @@
     text-align: left;
     flex-direction: column;
     padding-top: 50px;
-    padding-bottom: 50px;
+    padding-bottom: 100px;
     height: auto;
     color: cadetblue;
-    
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 section {

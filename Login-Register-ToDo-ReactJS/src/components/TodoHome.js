@@ -3,82 +3,49 @@ import './../static/styles/Content.css'
 import TaskContainer from './TaskConatiner'
 // import axios from 'axios'
 
+// TodoHome component where users tasks are displayed when he/she logs in
+function TodoHome({ tasks, setTask }) {
 
-function TodoHome({tasks, setTask}){
-
+    /* Function to handle the task's check box being checked/unchecked -> changes completed 
+       field in task object to true/false */
     const handleCheck = (id) => {
         const updatedTasks = tasks.map(task => {
-            if(task.id_val === id){
-                task.completed = !task.completed 
-                // axios.put(`http://192.168.18.127:5000/tasks/updatecheck/${id}`, task)
-                // .then(res => console.log(res))
-                // .catch(err=> console.log(err))
+            if (task.id_val === id) {
+                task.completed = !task.completed
             }
             return task
         })
-        return updatedTasks
+        setTask(updatedTasks)
     }
 
-    const handleChange = (id) => {
-        setTask(handleCheck(id))
-    }
-
+    // Function to handle the task's delete icon being clicked -> deletes the tasks from the userList
     const handleDelete = (id) => {
         const updatedTasks = tasks.filter((task) => {
             return task.id_val !== id
         })
-        return updatedTasks
-    }
-    
-    const deleteTask = (id) => {
-        console.log(id)
-        
-        setTask(handleDelete(id))
-
-        // axios.delete(`http://192.168.18.127:5000/tasks/delete/${id}`)
-        //     .then(res => console.log(res))
-        //     .catch(err => console.log(err))
-        
+        setTask(updatedTasks)
     }
 
+    // Function to handle the update of a task after a new description is submitted
     const handleUpdate = (id, desc) => {
         const updatedTasks = tasks.map(task => {
-            if(task.id_val === id){
+            if (task.id_val === id) {
                 task.desc = desc
             }
-            // axios.put(`http://192.168.18.127:5000/tasks/update/${id}`, {desc:desc})
-            //     .then(res => console.log(res))
-            //     .catch(err=> console.log(err))
             return task
         })
-        return updatedTasks
+        setTask(updatedTasks)
     }
-
-    const updateTask = (id, desc) => {
-        setTask(handleUpdate(id, desc))
-    }
-
-    // componentDidMount() {
-    //     setTimeout(() => {
-    //         this.setState({
-    //             isLoading: false
-    //         })
-    //     }, 1500);
-    // }
-
 
     let inline_style_container = { textAlign: "center" }
-    
-     
+
     return (
         <div style={inline_style_container}>
-            <div className="container">  
-                <TaskContainer tasks={tasks} setTask={setTask} handleChange={handleChange} deleteTask={deleteTask} updateTask={updateTask}/> 
+            <div className="container">
+                <TaskContainer tasks={tasks} setTask={setTask} handleChange={handleCheck} deleteTask={handleDelete} updateTask={handleUpdate} />
             </div>
         </div>
     )
-    //isLoading={this.state.isLoading}/>
-    
 }
 
 export default TodoHome

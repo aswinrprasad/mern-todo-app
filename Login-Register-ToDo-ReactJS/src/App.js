@@ -7,13 +7,15 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import userDets from './components/userList'
 import TodoHome from './components/TodoHome'
 import {Link} from 'react-router-dom'
+
+// The component at the highest level. Manages base state.
 function App(){
+
+  // userList is to staore all the users from the database
   const [userList, addUser] = useState(userDets)
   const [userPos, setUserPos] = useState(0)
 
-
-
-
+  // setTask function is to add tasks to a specific user objects tasks field.
   const setTask = (tasks) => {
     let pos = 0
     addUser(() => {
@@ -28,6 +30,7 @@ function App(){
     })
   }
 
+  // setUser() checks which user is logged in and sets isLogged and returns the modified userList
   const setUser = () => {
     let pos = 0
     addUser(() => {
@@ -44,12 +47,14 @@ function App(){
   console.log(userList)
   console.log(`User pos is : ${userPos}`)
 
+  /* Conditional rendering for user being logged in or not. Displays TodoHome component if logged in, 
+     else displays Error message and prompts to login again. */
   return (
     <Router>
       <div className="main">
         <Navbar isLogged={userList[userPos].isLogged} setUser={setUser}/>
         
-        <Home userList={userList} addUser={addUser} userPos={userPos} setUserPos={setUserPos}/>
+        <Home userList={userList} addUser={addUser} userPos={userPos} setUserPos={setUserPos} setTask={setTask}/>
         <Switch>
           <Route path="/todohome" exact render={() => {
             if(userList[userPos].isLogged === true)

@@ -3,20 +3,24 @@
 import React, { useState } from 'react'
 //import taskData from './TaskData'
 
+// Component used to input tasks/ submit tasks
 function GetTask(props){    
 
-        
+    // fieldVal is the value state used in input field of todo tasks
     const [fieldVal, setFieldVal] = useState("")
-        //this.handleChange = this.handleChange.bind(this)
-        //this.handleSubmit = this.handleSubmit.bind(this)
     
+    // handleChange function is used to set the fieldVal dynamically as input field changes
     const handleChange = (event) => {
         setFieldVal(event.target.value)
     }
 
+    //handleSubmit function is used to store the task inputted when submit button is clicked
     const handleSubmit = (event) => {
+        event.preventDefault()
+
         alert('A to-do task was submitted : ' + fieldVal)
         
+        // Checking and generating a random ID value which is not already present in the User's tasks array
         let temp = Math.floor((Math.random() * 100) + 1)
         let id_val=0
         props.tasks.forEach(task => {
@@ -25,12 +29,13 @@ function GetTask(props){
             else 
                 id_val = temp
         })
+
+        // Storing the value/task object into the tasks array of the user which is recieved with props
         let temp_task = {
             id_val:id_val,
             desc:fieldVal,
             completed:false
         }
-
         props.tasks.push(temp_task)
 
         // axios.post("http://192.168.18.127:5000/tasks/add", temp_task)
@@ -55,8 +60,11 @@ function GetTask(props){
         //         td: prevState.td
         //     }
         // })
+
+        // Set fieldVal to empty string after task submission
         setFieldVal("")
-        event.preventDefault()
+        
+        // Log the task that is submitted
         console.log(props.tasks)
     }
 
