@@ -100,6 +100,23 @@ function Register({ userList, addUser }) {
         const crypto = require('crypto');
         event.preventDefault()
 
+        // Loop through the userList and check if the submitted email already exists 
+        for (let u of userList) {
+            if (u.email === emailField) {
+                alert(`The user email ${emailField} already exists in the database! Try again with a different email.`)
+                setEmailField("")
+                setEmailBoxStyle({ borderColor: "red" })
+                return false
+            }
+            if (u.mobile === mobileField) {
+                alert(`The user mobile number ${mobileField} already exists in the database! Try again with a different mobile number.`)
+                setMobileField("")
+                setMobileBoxStyle({ borderColor: "red" })
+                return false
+            }
+
+        }
+
         // Generating a random id value for the new user which does not already exist
         let id_val = Math.floor((Math.random() * 100) + 1)
         for (const user in userList) {
@@ -125,6 +142,31 @@ function Register({ userList, addUser }) {
         ])
 
         alert(`User with email: ${emailField} Added!`)
+
+        // Clearing all the fields and inline styles set after user is inserted into the database
+        setNameField("")
+        setEmailField("")
+        setEmailBoxStyle({
+            borderColor: "",
+            ':focus': {
+                color: "red"
+            }
+        })
+        setMobileField("")
+        setMobileBoxStyle({
+            borderColor: "",
+            ':focus': {
+                color: "red"
+            }
+        })
+        setPasswordField("")
+        setCpwField("")
+        setPwBoxStyle({
+            borderColor: "",
+            ':focus': {
+                color: "red"
+            }
+        })
     }
 
     return (
@@ -148,39 +190,39 @@ function Register({ userList, addUser }) {
                         <input name="email"
                             type="text"
                             style={emailBoxSyle}
-                            onChange={emailChange} 
-                            value={emailField} 
-                            placeholder="Enter your email id" 
+                            onChange={emailChange}
+                            value={emailField}
+                            placeholder="Enter your email id"
                             required />
                     </section>
                     <section>
                         <i>Mobile</i> <br />
-                        <input name="mobile" 
-                            type="text" 
-                            style={mobileBoxSyle} 
-                            onChange={mobileChange} 
-                            value={mobileField} 
-                            placeholder="Enter your mobile number" 
+                        <input name="mobile"
+                            type="text"
+                            style={mobileBoxSyle}
+                            onChange={mobileChange}
+                            value={mobileField}
+                            placeholder="Enter your mobile number"
                             required />
                     </section>
                     <section>
                         <i>Password</i> <br />
-                        <input name="password" 
-                            style={pwBoxStyle} 
-                            onChange={passwordChange} 
-                            value={passwordField} 
-                            type="password" 
-                            placeholder="Enter your password" 
+                        <input name="password"
+                            style={pwBoxStyle}
+                            onChange={passwordChange}
+                            value={passwordField}
+                            type="password"
+                            placeholder="Enter your password"
                             required />
                     </section>
                     <section>
                         <i>Confirm Password</i> <br />
-                        <input name="cpw" 
-                            style={pwBoxStyle} 
-                            onChange={cpwChange} 
-                            value={cpwField} 
-                            type="password" 
-                            placeholder="Enter your password" 
+                        <input name="cpw"
+                            style={pwBoxStyle}
+                            onChange={cpwChange}
+                            value={cpwField}
+                            type="password"
+                            placeholder="Enter your password"
                             required />
                     </section>
                     <section>

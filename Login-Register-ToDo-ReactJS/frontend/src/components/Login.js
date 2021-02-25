@@ -90,11 +90,16 @@ function Login({ userList, addUser, userPos, setUserPos }) {
         else if (f_email === 1 && f_pass === 0) {
             alert('Password incorrect')
             setPasswordField("")
+            setPasswordBoxStyle({ borderColor: "red" })
+
         }
         else {
             alert('Password or Email are incorrect')
             setEmailField("")
+            setEmailBoxStyle({ borderColor: "red" })
             setPasswordField("")
+            setPasswordBoxStyle({ borderColor: "red" })
+
         }
     }
 
