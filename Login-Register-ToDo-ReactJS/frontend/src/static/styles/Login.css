@@ -16,8 +16,6 @@
     padding-bottom: 100px;
     height: auto;
     color: cadetblue;
-    padding-left: 10px;
-    padding-right: 10px;
 }
 
 section {
@@ -61,7 +59,7 @@ section {
 
 input[type="text"],input[type="password"]{
     height: 40px;
-    width: 250px;
+    width: 100%;
     border-bottom-color: rgb(230, 237, 247);
     border-left: none;
     border-right: none;

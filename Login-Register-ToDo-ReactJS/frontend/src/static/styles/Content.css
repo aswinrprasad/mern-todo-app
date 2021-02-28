@@ -2,7 +2,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 75vh;
+    height: 100%;
+    padding-bottom: 5%;
 }
 
 .task-container{
