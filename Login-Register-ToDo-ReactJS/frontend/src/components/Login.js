@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import '../static/styles/Login.css'
 import todoBG from '../static/images/todo-bg.jpg'
 import { useHistory } from 'react-router-dom'
+import axios from 'axios'
 
 // Login Component which is displayed in the home page
 function Login({ userList, addUser, userPos, setUserPos }) {
@@ -72,7 +73,10 @@ function Login({ userList, addUser, userPos, setUserPos }) {
                     if (user.password === crypto.createHash('sha1').update(passwordField).digest('hex')) {
                         console.log(user.password)
                         f_pass = 1
-                        user.isLogged = true
+                        user.logged = true
+                        axios.put("http://192.168.18.139:5000/api/users/"+user.id+"/login", {logged: true})
+                            .then(res => console.log("Login Successful! =>"+user.name))
+                            .catch(err => console.log(err))
                         setUserPos(pos)
                     }
                 }

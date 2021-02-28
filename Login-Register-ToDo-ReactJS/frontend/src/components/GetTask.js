@@ -1,5 +1,5 @@
 
-//import axios from 'axios'
+import axios from 'axios'
 import React, { useState } from 'react'
 //import taskData from './TaskData'
 
@@ -38,9 +38,9 @@ function GetTask(props){
         }
         props.tasks.push(temp_task)
 
-        // axios.post("http://192.168.18.127:5000/tasks/add", temp_task)
-        //     .then(console.log(`The task has been pushed into mongo : ${JSON.stringify(temp_task)}`))
-        //     .catch(err => console.log(err))
+        axios.post(`http://192.168.18.139:5000/api/users/${props.user.id}/addtask`, temp_task)
+            .then(console.log(`The task has been pushed into mongo : ${JSON.stringify(temp_task)}`))
+            .catch(err => console.log(err))
 
         props.setTask([
             ...props.tasks

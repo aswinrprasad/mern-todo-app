@@ -45,7 +45,12 @@ const userSchema = new Schema({
             type: Boolean,
             default: false
         }
-    }]
+    }],
+    logged: {
+        type: Boolean,
+        required: true,
+        default: false
+    }
 })
 
 const User = mongoose.model('User', userSchema)

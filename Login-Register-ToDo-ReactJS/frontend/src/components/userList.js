@@ -12,7 +12,7 @@ const userList = [{
             desc : "Loaded from const task"
         }
     ],
-    isLogged : false
+    logged : false
 }]
 
 export default userList

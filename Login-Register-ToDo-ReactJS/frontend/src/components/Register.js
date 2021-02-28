@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import '../static/styles/Login.css'
 import { Link } from 'react-router-dom'
 import todoBG from '../static/images/todo-bg.jpg'
-
+import axios from 'axios'
 // Register Component which is displayed when clicking on Register Nav item which makes use of routes.
 function Register({ userList, addUser }) {
 
@@ -134,8 +134,11 @@ function Register({ userList, addUser }) {
             // Hashing the password for security. sha1 hashing used.
             password: crypto.createHash('sha1').update(passwordField).digest('hex'),
             tasks: [],
-            isLogged: false
+            logged: false
         }
+        axios.post("http://192.168.18.139:5000/api/users/adduser", temp)
+            .then(res => console.log(res))
+            .catch(err => console.log(err))
         addUser([
             ...userList,
             temp

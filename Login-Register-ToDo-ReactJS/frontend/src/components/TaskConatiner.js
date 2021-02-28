@@ -16,7 +16,7 @@ function TaskContainer(props) {
     })
     return(
         <div className="task-container">
-            <GetTask tasks={props.tasks} setTask={props.setTask}/>                     
+            <GetTask user={props.user} tasks={props.tasks} setTask={props.setTask}/>                     
             <ul>
                 {tc}
             </ul>

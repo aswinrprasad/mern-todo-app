@@ -27,6 +27,13 @@ router.route('/adduser').post((req, res) => {
 })
 
 let uFetch
+router.route('/:id/removeuser').delete((req, res) => {
+    User.findOneAndDelete({ id: req.params.id })
+        .then(uFetch => { res.json(`User with name : ${uFetch.name} -> Deleted!`) })
+        .catch(err => { res.status(400).json('Data not found in the database : Error code : ' + err) })
+})
+
+
 router.route('/:id/addtask').put((req, res) => {
     const id = req.params.id
     const id_val = req.body.id_val
@@ -103,6 +110,18 @@ router.route('/:uid/updatetaskcheck/:tid').put((req, res) => {
         })
         .then((uFetch) => { res.json(`Task with ID: ${tid} | updated with new completion status : ${completed} | for User ${uFetch.name}`) })
         .catch(err => { res.status(400).json('User or task with given ID Not found') })
+})
+
+router.route('/:uid/login').put((req, res) => {
+    User.findOneAndUpdate({ id: req.params.uid}, { logged:true })
+        .then(uFetch => res.json(`User : ${uFetch.name} has been logged in.`))
+        .catch(err => res.json(`User with ID : ${req.params.uid} not found in the database.`))
+})
+
+router.route('/:uid/logout').put((req, res) => {
+    User.findOneAndUpdate({ id: req.params.uid }, { logged:false })
+        .then(uFetch => res.json(`User : ${uFetch.name} has been logged out.`))
+        .catch(err => res.json(`User with ID : ${req.params.uid} not found in the database.`))
 })
 
 module.exports = router

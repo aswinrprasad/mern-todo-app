@@ -4,7 +4,7 @@ import TaskContainer from './TaskConatiner'
 // import axios from 'axios'
 
 // TodoHome component where users tasks are displayed when he/she logs in
-function TodoHome({ tasks, setTask }) {
+function TodoHome({ user, tasks, setTask }) {
 
     /* Function to handle the task's check box being checked/unchecked -> changes completed 
        field in task object to true/false */
@@ -42,7 +42,7 @@ function TodoHome({ tasks, setTask }) {
     return (
         <div style={inline_style_container}>
             <div className="container">
-                <TaskContainer tasks={tasks} setTask={setTask} handleChange={handleCheck} deleteTask={handleDelete} updateTask={handleUpdate} />
+                <TaskContainer user={user} tasks={tasks} setTask={setTask} handleChange={handleCheck} deleteTask={handleDelete} updateTask={handleUpdate} />
             </div>
         </div>
     )

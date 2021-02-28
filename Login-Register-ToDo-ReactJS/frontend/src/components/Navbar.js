@@ -3,11 +3,11 @@ import '../static/styles/Navbar.css'
 import { Link } from 'react-router-dom'
 
 // NavBar Component which is always displayed
-function Navbar({ isLogged, setUser }) {
+function Navbar({ logged, setUser }) {
 
     // navComp will be initialized by conditionally rendering by checking if user is logged in or not.
     let navComp;
-    if (isLogged !== true) {
+    if (logged !== true) {
         // If the user is not logged in, it displays register and contact nav items
         navComp = (
             <div className="links">

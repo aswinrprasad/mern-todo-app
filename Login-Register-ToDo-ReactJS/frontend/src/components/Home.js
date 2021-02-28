@@ -22,17 +22,17 @@ function Home({userList, addUser, userPos, setUserPos, setTask}){
         <div className="home-body">
             <Switch>
                 <Route path="/" exact render={() => {
-                    if(userList[userPos].isLogged === false)
+                    if(userList[userPos].logged === false)
                         return <Login userList={userList} addUser={addUser} userPos={userPos} setUserPos={setUserPos}/> 
                     else 
-                        return <TodoHome tasks={userList[userPos].tasks} setTask={setTask} />
+                        return <TodoHome user={userList[userPos]} tasks={userList[userPos].tasks} setTask={setTask} />
                 }}/>
                 
                 <Route path="/register" exact render={() => {
-                    if(userList[userPos].isLogged === false)
+                    if(userList[userPos].logged === false)
                         return <Register userList={userList} addUser={addUser}/> 
                     else 
-                        return <TodoHome tasks={userList[userPos].tasks} setTask={setTask} />
+                        return <TodoHome user={userList[userPos]} tasks={userList[userPos].tasks} setTask={setTask} />
                 }}/> 
             </Switch>
         </div>
