@@ -18,7 +18,7 @@ function App() {
   // useEffect() used to load the usedetails from the db to userList state variable
   useEffect(() => {
     axios.get("http://192.168.18.139:5000/api/users/").then(res => {
-      console.log("Fasdasdnasd" + JSON.stringify(res.data))
+      //console.log(JSON.stringify(res.data))
       addUser([...res.data])
     })
       .catch(err => console.log(err))
@@ -50,7 +50,9 @@ function App() {
         if (pos === userPos) {
           const temp = !user.logged
           user.logged = temp
-          axios.put("http://192.168.18.139:5000/api/users/"+user.id+"/logout", {logged: temp})
+          localStorage.setItem("uid", user.id)
+          localStorage.setItem("logged", false)
+          axios.put("http://192.168.18.139:5000/api/users/" + user.id + "/logout", { logged: temp })
         }
         pos += 1
         return user
@@ -59,8 +61,6 @@ function App() {
       return newUser
     })
   }
-  console.log(userList)
-  console.log(`User pos is : ${userPos}`)
 
   /* Conditional rendering for user being logged in or not. Displays TodoHome component if logged in, 
      else displays Error message and prompts to login again. */
@@ -83,8 +83,8 @@ function App() {
                   </Link>
                 </div>
               )
-          }
-          } />
+          }} />
+          
         </Switch>
         <Footer />
       </div>

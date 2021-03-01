@@ -62,21 +62,20 @@ function Login({ userList, addUser, userPos, setUserPos }) {
         let f_email = 0, f_pass = 0, pos = 0
         addUser(() => {
             const u_l = userList.map((user) => {
-                console.log(user)
 
                 // If both email and password are correct => f_email = 1, f_pass = 1
                 if (user.email === emailField) {
-                    console.log(user.email)
                     f_email = 1
 
                     // The user password are stored as sha1 hashed formats
                     if (user.password === crypto.createHash('sha1').update(passwordField).digest('hex')) {
-                        console.log(user.password)
                         f_pass = 1
                         user.logged = true
-                        axios.put("http://192.168.18.139:5000/api/users/"+user.id+"/login", {logged: true})
-                            .then(res => console.log("Login Successful! =>"+user.name))
+                        axios.put("http://192.168.18.139:5000/api/users/" + user.id + "/login", { logged: true })
+                            .then(res => console.log("Login Successful! =>" + user.name))
                             .catch(err => console.log(err))
+                        localStorage.setItem("uid", user.id)
+                        localStorage.setItem("logged", true)
                         setUserPos(pos)
                     }
                 }

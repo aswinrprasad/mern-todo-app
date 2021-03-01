@@ -10,6 +10,8 @@
     -webkit-border-radius: 10px 10px 10px 10px;
     border-radius: 10px 10px 10px 10px;
     padding-top: 3%;
+    padding-left: 5%;
+    padding-right: 5%;
     margin: 10%;
     background: #f9fbfd;
     width: 100%;
@@ -20,6 +22,28 @@
     justify-content: center;
     
 }
+
+.task-container input[type="text"]{
+    height: 40px;
+    width: 85%;
+    border-bottom-color: rgb(230, 237, 247);
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    border-radius: 5px;
+}
+
+.task-container input::placeholder{
+    font-family: cursive;
+    font-size: 13px;
+    text-align: center;
+}
+
+.task-container input:focus{
+    outline: none;
+    border-bottom-color: cadetblue;
+}
+
 ul{
     list-style-position: inside;
     padding: 1%;
@@ -29,8 +53,6 @@ li {
 }
 
 hr {
-    margin-left: 8%;
-    margin-right: 8%;
     color: lightslategray;
 }
 span{

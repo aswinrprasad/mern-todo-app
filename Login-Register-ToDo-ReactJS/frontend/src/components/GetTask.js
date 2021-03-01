@@ -49,9 +49,6 @@ function GetTask(props){
         
         // Set fieldVal to empty string after task submission
         setFieldVal("")
-        
-        // Log the task that is submitted
-        console.log(props.tasks)
     }
 
     
