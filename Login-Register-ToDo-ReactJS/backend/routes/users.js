@@ -4,12 +4,14 @@ const { Mongoose } = require('mongoose')
 
 let User = require('../models/user.model')
 
+// Fetch all the users from the db
 router.route('/').get((req, res) => {
     User.find()
         .then(users => res.json(users))
         .catch(err => res.status(400).json('Error: ' + err))
 })
 
+// To add a new user to the db
 router.route('/adduser').post((req, res) => {
     const id = req.body.id
     const name = req.body.name
@@ -17,8 +19,6 @@ router.route('/adduser').post((req, res) => {
     const mobile = req.body.mobile
     const password = req.body.password
     const tasks = req.body.tasks
-    //let completed = false
-    //let id = Task.find().sort({id:1}).limit(1) ? 1 : Task.find().sort({_id:1}).limit(1) +1 
     const newUser = new User({ id, name, email, mobile, password, tasks })
 
     newUser.save()
@@ -27,29 +27,20 @@ router.route('/adduser').post((req, res) => {
 })
 
 let uFetch
+
+// To remove an existing user from the db by passing in the id as a request parameter
 router.route('/:id/removeuser').delete((req, res) => {
     User.findOneAndDelete({ id: req.params.id })
         .then(uFetch => { res.json(`User with name : ${uFetch.name} -> Deleted!`) })
         .catch(err => { res.status(400).json('Data not found in the database : Error code : ' + err) })
 })
 
-
+// To add a to-do task for a user by passing in the ID of the user as request parameter 
 router.route('/:id/addtask').put((req, res) => {
     const id = req.params.id
     const id_val = req.body.id_val
     const desc = req.body.desc
     const completed = req.body.completed
-
-    User.findOne({ id: id }, (err, userFetched) => {
-        if (err) {
-            console.log(err)
-            return err
-        }
-        else {
-            //console.log(taskFetched)
-            uFetch = userFetched
-        }
-    })
 
     //inserted data is the object to be inserted 
     User.findOneAndUpdate({ id: id },
@@ -66,6 +57,7 @@ router.route('/:id/addtask').put((req, res) => {
         .catch(err => { res.status(400).json('User with given ID Not found') })
 })
 
+// To remove a to-do task identified by passing user ID and Task ID using request parameters 
 router.route('/:uid/removetask/:tid').delete((req, res) => {
     const uid = req.params.uid
     const tid = req.params.tid
@@ -82,6 +74,7 @@ router.route('/:uid/removetask/:tid').delete((req, res) => {
         .catch(err => { res.status(400).json('User or task with given ID Not found') })
 })
 
+// To update to-do task description by passing user ID and Task ID using request parameters 
 router.route('/:uid/updatetaskdesc/:tid').put((req, res) => {
     const uid = req.params.uid
     const tid = req.params.tid
@@ -97,6 +90,7 @@ router.route('/:uid/updatetaskdesc/:tid').put((req, res) => {
         .catch(err => { res.status(400).json('User or task with given ID Not found') })
 })
 
+// To update to-do task completed or not by passing user ID and Task ID using request parameters 
 router.route('/:uid/updatetaskcheck/:tid').put((req, res) => {
     const uid = req.params.uid
     const tid = req.params.tid
@@ -112,12 +106,14 @@ router.route('/:uid/updatetaskcheck/:tid').put((req, res) => {
         .catch(err => { res.status(400).json('User or task with given ID Not found') })
 })
 
+// To log a user in to his/her account 
 router.route('/:uid/login').put((req, res) => {
     User.findOneAndUpdate({ id: req.params.uid}, { logged:true })
         .then(uFetch => res.json(`User : ${uFetch.name} has been logged in.`))
         .catch(err => res.json(`User with ID : ${req.params.uid} not found in the database.`))
 })
 
+// To log a user out of his/her account 
 router.route('/:uid/logout').put((req, res) => {
     User.findOneAndUpdate({ id: req.params.uid }, { logged:false })
         .then(uFetch => res.json(`User : ${uFetch.name} has been logged out.`))
