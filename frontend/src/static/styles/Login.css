@@ -19,9 +19,9 @@
 }
 
 section {
-    margin: 10px;
+    width: 70%;
+    margin: 5px; 
 }
-
 #login-btn-container{
     margin-top: 20px;
     display: flex;

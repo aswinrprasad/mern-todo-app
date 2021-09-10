@@ -28,11 +28,11 @@ function Navbar({ logged, setUser }) {
             </div>
         )
     }
-
+    let titleComp = logged ? "Home" : ""
     return (
         <header>
             <div className="title">
-                <h1>To-do App Login</h1>
+                <h1>To-do App {titleComp}</h1>
             </div>
             {navComp}
         </header>

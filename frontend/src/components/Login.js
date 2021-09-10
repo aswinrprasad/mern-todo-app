@@ -111,8 +111,9 @@ function Login({ userList, addUser, userPos, setUserPos }) {
             <div className="col-sm-9">
                 <img className="image" src={todoBG} alt="#" />
             </div>
-            <div className="col-sm-3 login">
+            <div className="col-sm-3 login">    
                 <form onSubmit={handleSubmit} className="login-container">
+                    <h4 style={{paddingTop: "5%", color:"cadetblue"}}>LOGIN</h4>
                     <section>
                         <i>Email</i> <br />
                         <input name="email"

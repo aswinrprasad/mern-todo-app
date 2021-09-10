@@ -33,7 +33,7 @@ function GetTask(props){
 
         props.tasks.push(temp_task)
 
-        axios.post("http://192.168.18.127:5000/tasks/add", temp_task)
+        axios.post("http://0.0.0.0:5000/tasks/add", temp_task)
             .then(console.log(`The task has been pushed into mongo : ${JSON.stringify(temp_task)}`))
             .catch(err => console.log(err))
 

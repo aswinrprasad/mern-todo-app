@@ -11,7 +11,7 @@
 }
 
 #regrow, #logrow {
-    min-height: 100vh;
+    min-height: 100%;
 }
 
 .col-sm-9 {

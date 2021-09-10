@@ -179,6 +179,7 @@ function Register({ userList, addUser }) {
             </div>
             <div className="col-sm-3 login">
                 <form onSubmit={handleSubmit} className="login-container">
+                    <h4 style={{paddingTop: "5%", color:"cadetblue"}}>REGISTER</h4>
                     <section>
                         <i>Name</i> <br />
                         <input name="name"
@@ -228,7 +229,7 @@ function Register({ userList, addUser }) {
                             placeholder="Enter your password"
                             required />
                     </section>
-                    <section>
+                    <section style={{textAlign: "center"}}>
                         <Link to="/">
                             <label id="go-to-login">Already have an account ? <br />
                             Click here to Login.</label> <br />

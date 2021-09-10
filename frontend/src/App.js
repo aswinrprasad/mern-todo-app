@@ -76,7 +76,7 @@ function App() {
               return <TodoHome user={userList[userPos]} tasks={userList[userPos].tasks} setTask={setTask} />
             else
               return (
-                <div style={{ height: "100vh", display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column" }}>
+                <div style={{ height: "100%", display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column" }}>
                   <h2>Please Login again</h2>
                   <Link to="/">
                     <input className="btn btn-large btn-info" type="button" value="Login" />

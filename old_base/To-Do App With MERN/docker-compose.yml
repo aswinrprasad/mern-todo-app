@@ -6,11 +6,7 @@ services:
       context: ./backend
       dockerfile: dockerfile
     image: aswinrprasad/todoapp-v2-be
-    container_name: todoappv2-be
     command: npm start
-    volumes:
-      - ./backend/:/usr/src/app
-      - /usr/src/app/node_modules
     ports:
       - "5000:5000"
     depends_on:
@@ -21,9 +17,7 @@ services:
     networks:
       - app-network
   mongo:
-    image: aswinrprasad/mongo
-    volumes:
-      - data-volume:/data/db
+    image: mongo
     ports:
       - "27017:27017"
     networks:
@@ -33,11 +27,7 @@ services:
       context: ./frontend
       dockerfile: dockerfile
     image: aswinrprasad/todoapp-v2-fe
-    container_name: todoappv2-fe
     command: npm start
-    volumes:
-      - ./frontend/:/usr/app
-      - /usr/app/node_modules
     depends_on:
       - server
     ports:
@@ -46,11 +36,7 @@ services:
       - app-network
 
 networks:
-    app-network:
-        driver: bridge
+    app-network: 
+      external:
+        name: mern_app_nw
 
-volumes:
-    data-volume:
-    node_modules:
-    web-root:
-      driver: local

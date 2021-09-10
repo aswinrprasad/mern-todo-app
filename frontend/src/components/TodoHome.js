@@ -49,7 +49,7 @@ function TodoHome({ user, tasks, setTask }) {
         setTask(updatedTasks)
     }
 
-    let inline_style_container = { textAlign: "center" }
+    let inline_style_container = { textAlign: "center", height: "100%" }
 
     return (
         <div style={inline_style_container}>

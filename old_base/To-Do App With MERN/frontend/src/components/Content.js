@@ -12,7 +12,7 @@ function Content(props){
     const [tasks, setTask] = useState([])
     
     useEffect(() => {
-        axios.get("http://192.168.18.127:5000/tasks").then(res =>{
+        axios.get("http://0.0.0.0:5000/tasks").then(res =>{
             setTask([...res.data])
         })
         .catch(err => console.log(err))
@@ -26,7 +26,7 @@ function Content(props){
             const updatedTasks = tasks.map(task => {
                 if(task.id_val === id){
                     task.completed = task.completed ? false : true
-                    axios.put(`http://192.168.18.127:5000/tasks/updatecheck/${id}`, task)
+                    axios.put(`http://0.0.0.0:5000/tasks/updatecheck/${id}`, task)
                     .then(res => console.log(res))
                     .catch(err=> console.log(err))
                 }
@@ -48,7 +48,7 @@ function Content(props){
             return updatedTasks
         })
 
-        axios.delete(`http://192.168.18.127:5000/tasks/delete/${id}`)
+        axios.delete(`http://0.0.0.0:5000/tasks/delete/${id}`)
             .then(res => console.log(res))
             .catch(err => console.log(err))
         
@@ -60,7 +60,7 @@ function Content(props){
                 if(task.id_val === id){
                     task.desc = desc
                 }
-                axios.put(`http://192.168.18.127:5000/tasks/update/${id}`, {desc:desc})
+                axios.put(`http://0.0.0.0:5000/tasks/update/${id}`, {desc:desc})
                     .then(res => console.log(res))
                     .catch(err=> console.log(err))
                 return task
