@@ -1,0 +1,35 @@
+version: '3'
+services:
+  web-ui: 
+    restart: unless-stopped
+    build: ./frontend/.
+    ports: 
+      - 3000:3000
+    networks: 
+      - frontend-nw
+
+  api-server:
+    restart: unless-stopped
+    build: ./backend/
+    ports: 
+      - 5000:5000
+    networks:
+      - backend-nw
+
+  mongo:
+    image: mongo:latest
+    volumes: 
+      - "./mongo_db:/data/db"
+    networks:
+      - backend-nw
+
+networks:
+  backend-nw:
+    driver: bridge
+  frontend-nw:
+    driver: bridge
+
+volumes: 
+  mongo_db:
+    driver: local
+    
