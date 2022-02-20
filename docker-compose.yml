@@ -19,7 +19,8 @@ services:
   mongo:
     image: mongo:latest
     volumes: 
-      - "./mongo_db:/data/db"
+      - "mongo_db:/data/db"
+      - "mongo_db_config:/data/configdb"
     networks:
       - backend-nw
 
@@ -29,7 +30,7 @@ networks:
   frontend-nw:
     driver: bridge
 
-volumes: 
+volumes:
   mongo_db:
-    driver: local
+  mongo_db_config:
     
