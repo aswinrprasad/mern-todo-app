@@ -4,6 +4,7 @@ import Navbar from './components/Navbar'
 import Home from './components/Home'
 import Footer from './components/Footer';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import userDets from './components/userList'
 import TodoHome from './components/TodoHome'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
@@ -12,7 +13,7 @@ import axios from 'axios'
 function App() {
 
   // userList is to staore all the users from the database
-  const [userList, addUser] = useState([])
+  const [userList, addUser] = useState(userDets)
 
   // useEffect() used to load the usedetails from the db to userList state variable
   useEffect(() => {
