@@ -7,6 +7,9 @@ services:
       - 3000:3000
     networks: 
       - frontend-nw
+    depends_on:
+      - api-server
+      - mongo
 
   api-server:
     restart: unless-stopped
@@ -15,6 +18,8 @@ services:
       - 5000:5000
     networks:
       - backend-nw
+    depends_on:
+      - mongo
 
   mongo:
     image: mongo:latest
@@ -35,6 +40,8 @@ services:
       - ME_CONFIG_MONGODB_SERVER=mongo
     networks:
       - backend-nw
+    depends_on:
+      - mongo
 
 networks:
   backend-nw:
