@@ -38,7 +38,7 @@ function GetTask(props){
         }
         props.tasks.push(temp_task)
 
-        axios.put(`http://192.168.18.139:5000/api/users/${props.user.id}/addtask`, temp_task)
+        axios.put(`http://localhost:5000/api/users/${props.user.id}/addtask`, temp_task)
             .then(console.log(`The task has been pushed into mongo : ${JSON.stringify(temp_task)}`))
             .catch(err => console.log(err))
 

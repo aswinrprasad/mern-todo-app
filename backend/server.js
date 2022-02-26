@@ -10,7 +10,8 @@ const app = express()
 const port = process.env.PORT || 5000
 
 // use MONGO_URL in .env file if provided, else use the hardcoded link
-const url = process.env.MONGO_URL || 'mongodb://0.0.0.0:27017/todousers'
+const url = process.env.MONGO_URL || 'mongodb://mongo:27017/todousers'
+app.options('*', cors())
 app.use(cors())
 app.use(express.json())
 

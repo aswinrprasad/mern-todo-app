@@ -13,7 +13,7 @@ function TodoHome({ user, tasks, setTask }) {
             if (task.id_val === id) {
                 const temp = !task.completed
                 task.completed = temp
-                axios.put(`http://192.168.18.139:5000/api/users/${user.id}/updatetaskcheck/${id}`, { completed: temp })
+                axios.put(`http://localhost:5000/api/users/${user.id}/updatetaskcheck/${id}`, { completed: temp })
                     .then(res => console.log(`Task with ID : ${id} checked/unchecked.`))
                     .catch(err => console.log(`User ID or Task ID not found. Error occured is : ${err}`))
             }
@@ -26,7 +26,7 @@ function TodoHome({ user, tasks, setTask }) {
     const handleDelete = (id) => {
         const updatedTasks = tasks.filter((task) => {
             if (task.id_val === id)
-                axios.delete(`http://192.168.18.139:5000/api/users/${user.id}/removetask/${id}`)
+                axios.delete(`http://localhost:5000/api/users/${user.id}/removetask/${id}`)
                     .then(res => console.log(`Task with ID : ${id} , Description : "${task.desc}" deleted!`))
                     .catch(err => console.log(`User ID or Task ID not found to delete task. Error occured is : ${err}`))
             return task.id_val !== id
@@ -40,7 +40,7 @@ function TodoHome({ user, tasks, setTask }) {
             if (task.id_val === id) {
                 const temp = task.desc
                 task.desc = desc
-                axios.put(`http://192.168.18.139:5000/api/users/${user.id}/updatetaskdesc/${id}`, { desc: desc })
+                axios.put(`http://localhost:5000/api/users/${user.id}/updatetaskdesc/${id}`, { desc: desc })
                     .then(res => console.log(`Task with ID : ${id} => Description : "${temp}" modified to "${desc}"`))
                     .catch(err => console.log(`User ID or Task ID not found to update description. Error occured is : ${err}`))
             }

@@ -71,7 +71,7 @@ function Login({ userList, addUser, userPos, setUserPos }) {
                     if (user.password === crypto.createHash('sha1').update(passwordField).digest('hex')) {
                         f_pass = 1
                         user.logged = true
-                        axios.put("http://192.168.18.139:5000/api/users/" + user.id + "/login", { logged: true })
+                        axios.put("http://localhost:5000/api/users/" + user.id + "/login", { logged: true })
                             .then(res => console.log("Login Successful! =>" + user.name))
                             .catch(err => console.log(err))
                         localStorage.setItem("uid", user.id)

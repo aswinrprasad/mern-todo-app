@@ -2,7 +2,7 @@ version: '3'
 services:
   web-ui: 
     restart: unless-stopped
-    build: ./frontend/.
+    build: ./frontend/
     ports: 
       - 3000:3000
     networks: 
@@ -18,9 +18,21 @@ services:
 
   mongo:
     image: mongo:latest
+    environment:
+      - 'MONGO_INITDB_DATABASE=todousers'
     volumes: 
       - "mongo_db:/data/db"
       - "mongo_db_config:/data/configdb"
+    networks:
+      - backend-nw
+
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 8111:8081
+    environment:
+      - ME_CONFIG_MONGODB_SERVER=mongo
     networks:
       - backend-nw
 

@@ -17,9 +17,10 @@ function App() {
 
   // useEffect() used to load the usedetails from the db to userList state variable
   useEffect(() => {
-    axios.get("http://192.168.18.139:5000/api/users/").then(res => {
+    axios.get("http://localhost:5000/api/users/").then(res => {
       //console.log(JSON.stringify(res.data))
-      addUser([...res.data])
+      if(res.data.length>0)
+        addUser([...res.data])
     })
       .catch(err => console.log(err))
     console.log("Users loaded..")
@@ -52,7 +53,7 @@ function App() {
           user.logged = temp
           localStorage.setItem("uid", user.id)
           localStorage.setItem("logged", false)
-          axios.put("http://192.168.18.139:5000/api/users/" + user.id + "/logout", { logged: temp })
+          axios.put("http://localhost:5000/api/users/" + user.id + "/logout", { logged: temp })
         }
         pos += 1
         return user

@@ -136,7 +136,7 @@ function Register({ userList, addUser }) {
             tasks: [],
             logged: false
         }
-        axios.post("http://192.168.18.139:5000/api/users/adduser", temp)
+        axios.post("http://localhost:5000/api/users/adduser", temp)
             .then(res => console.log(res))
             .catch(err => console.log(err))
         addUser([
